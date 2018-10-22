@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vuejs-todo-list</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="app" class="container">
+    <div class="row" :tasks="tasks">
+      <section class="list-group">
+        <h1>Tasks</h1>
+        <div class="form-inline my-2 my-lg-0">
+          <input type="text"
+                 class="form-control mr-sm-2"
+                 v-model="newTask"
+                 placeholder="New task"
+          >
+          <button @click="addTask" class="btn btn-primary add_button my-2 my-sm-0">Add</button>
+        </div>
+        <li class="list-group-item" v-for="(task, key, index) in tasks" :task="task">{{ key+1 }}: {{ task.title }}</li>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        newTask: '',
+        tasks: [
+          {
+            title: 'Make todo-list'
+          },
+          {
+            title: 'Upgrade todo-list'
+          }
+        ]
+      },
+      methods: {
+        addTask() {
+          this.tasks.push({
+            title: this.newTask
+          });
+          this.newTask = '';
+        },
+      }
+    });
+  </script>
+
+  <style>
+    .form-inline {
+      padding-bottom: 20px;
+    }
+  </style>
+</body>
+</html>
