@@ -23,7 +23,8 @@
           >
           <button @click="addTask" class="btn btn-primary add_button my-2 my-sm-0">Add</button>
         </div>
-        <li class="list-group-item" v-for="(task, key, index) in tasks" :task="task">{{ key+1 }}: {{ task.title }}</li>
+        <div v-if="alert == true" class="alert alert-primary" role="alert">field cannot be empty</div>
+        <li class="list-group-item" v-for="(task, key, index) in tasks">{{ key+1 }}: {{ task.title }}</li>
       </section>
     </div>
   </div>
@@ -34,6 +35,7 @@
     new Vue({
       el: '#app',
       data: {
+        alert: false,
         newTask: '',
         tasks: [
           {
@@ -46,10 +48,15 @@
       },
       methods: {
         addTask() {
-          this.tasks.push({
-            title: this.newTask
-          });
-          this.newTask = '';
+          if (this.newTask) {
+            this.tasks.push({
+              title: this.newTask
+            });
+            this.newTask = '';
+            this.alert = false;
+          } else {
+            this.alert = true;
+          }
         },
       }
     });
