@@ -26,7 +26,12 @@
             Add</button>
         </div>
         <div v-if="alert == true" class="alert alert-primary" role="alert">field cannot be empty</div>
-        <li class="list-group-item" v-for="(task, key, index) in tasks">{{ key+1 }}: {{ task.title }}</li>
+        <li class="list-group-item" v-for="(task, key, index) in tasks">{{ key+1 }}: {{ task.title }}
+          <button class="tasks__item__remove float-right btn btn-danger add_button my-2 my-sm-0"
+              @click="removeTask(key)"
+          >
+        <i class="fa fa-times"></i>
+      </button></li>
       </section>
     </div>
   </div>
@@ -59,6 +64,9 @@
           } else {
             this.alert = true;
           }
+        },
+        removeTask(index) {
+          this.tasks.splice(index, 1);
         },
       }
     });
